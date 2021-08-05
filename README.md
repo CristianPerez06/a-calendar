@@ -1,1 +1,7 @@
-# react-redux-calendar
+# react-redux-calendar for Codelitt interview
+
+## Features included:
+  - TO DO
+
+
+
