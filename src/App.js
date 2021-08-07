@@ -3,10 +3,8 @@ import { MainRouter } from './routers'
 
 const App = () => {
   return (
-    <div className='app-container w-100 h-100 p-2'>
-      <div className='App'>
-        <MainRouter />
-      </div>
+    <div className='App w-100 h-100 p-2'>
+      <MainRouter />
     </div>
   )
 }
