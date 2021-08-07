@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import { format } from 'date-fns'
-import { RemindersList, ReminderEditor } from '../components'
+import { RemindersList, AddReminder } from '../components'
 
 const CalendarItemModal = (props) => {
   const {
@@ -17,8 +17,8 @@ const CalendarItemModal = (props) => {
         {format(new Date(selectedDate), 'EEEE, MMMM do, yyyy')}
       </ModalHeader>
       <ModalBody>
-        <RemindersList />
-        <ReminderEditor date={selectedDate} />
+        <RemindersList date={selectedDate} />
+        <AddReminder date={selectedDate} />
       </ModalBody>
       <ModalFooter>
         <Button
@@ -26,7 +26,7 @@ const CalendarItemModal = (props) => {
           onClick={onCloseClick}
           disabled={isBussy}
         >
-          Cancel
+          Close
         </Button>
       </ModalFooter>
     </Modal>

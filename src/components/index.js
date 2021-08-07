@@ -1,5 +1,5 @@
 export { default as Calendar } from './Calendar.js'
 export { default as CalendarItem } from './CalendarItem.js'
 export { default as CalendarItemModal } from './CalendarItemModal.js'
-export { default as ReminderEditor } from './ReminderEditor.js'
+export { default as AddReminder } from './AddReminder.js'
 export { default as RemindersList } from './RemindersList.js'

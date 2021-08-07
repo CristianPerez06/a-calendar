@@ -1,113 +1,43 @@
 import React from 'react'
 import { Card } from 'reactstrap'
+import { getUnixTime } from 'date-fns'
+import { connect } from 'react-redux'
+import ReminderListItem from './ReminderListItem'
 
 const RemindersList = (props) => {
+  // Props
+  const { date, remindersObj } = props
+  const { data } = remindersObj
+
+  const currentDate = data.items.find(x => x.id === getUnixTime(date))
+  const remindersExist = currentDate && currentDate.reminders.length !== 0
+
   return (
     <Card>
       <span className='text-center bg-light'>Reminders list</span>
       <hr className='m-0' />
       <div className='events-list' style={{ maxHeight: 250 + 'px', overflowX: 'hidden', overflowY: 'auto' }}>
-        <div className='d-flex justify-content-between pl-2 pr-2'>
-          <span className='d-block font-weight-light font-italic'>An item</span>
-          <div className='buttons-container'>
-            <a className='text-info' disabled>Edit</a>
-            <a className='text-danger pl-2' disabled>Delete</a>
+        {!remindersExist && (
+          <div className='w-100 text-center mt-2 mb-2'>
+            <span className='text-center'>No events</span>
           </div>
-        </div>
-        <div className='d-flex justify-content-between pl-2 pr-2'>
-          <span className='d-block font-weight-light font-italic'>An item</span>
-          <div className='buttons-container'>
-            <a className='text-info' disabled>Edit</a>
-            <a className='text-danger pl-2' disabled>Delete</a>
-          </div>
-        </div>
-        <div className='d-flex justify-content-between pl-2 pr-2'>
-          <span className='d-block font-weight-light font-italic'>An item</span>
-          <div className='buttons-container'>
-            <a className='text-info' disabled>Edit</a>
-            <a className='text-danger pl-2' disabled>Delete</a>
-          </div>
-        </div>
-        <div className='d-flex justify-content-between pl-2 pr-2'>
-          <span className='d-block font-weight-light font-italic'>An item</span>
-          <div className='buttons-container'>
-            <a className='text-info' disabled>Edit</a>
-            <a className='text-danger pl-2' disabled>Delete</a>
-          </div>
-        </div>
-        <div className='d-flex justify-content-between pl-2 pr-2'>
-          <span className='d-block font-weight-light font-italic'>An item</span>
-          <div className='buttons-container'>
-            <a className='text-info' disabled>Edit</a>
-            <a className='text-danger pl-2' disabled>Delete</a>
-          </div>
-        </div>
-        <div className='d-flex justify-content-between pl-2 pr-2'>
-          <span className='d-block font-weight-light font-italic'>An item</span>
-          <div className='buttons-container'>
-            <a className='text-info' disabled>Edit</a>
-            <a className='text-danger pl-2' disabled>Delete</a>
-          </div>
-        </div>
-        <div className='d-flex justify-content-between pl-2 pr-2'>
-          <span className='d-block font-weight-light font-italic'>An item</span>
-          <div className='buttons-container'>
-            <a className='text-info' disabled>Edit</a>
-            <a className='text-danger pl-2' disabled>Delete</a>
-          </div>
-        </div>
-        <div className='d-flex justify-content-between pl-2 pr-2'>
-          <span className='d-block font-weight-light font-italic'>An item</span>
-          <div className='buttons-container'>
-            <a className='text-info' disabled>Edit</a>
-            <a className='text-danger pl-2' disabled>Delete</a>
-          </div>
-        </div>
-        <div className='d-flex justify-content-between pl-2 pr-2'>
-          <span className='d-block font-weight-light font-italic'>An item</span>
-          <div className='buttons-container'>
-            <a className='text-info' disabled>Edit</a>
-            <a className='text-danger pl-2' disabled>Delete</a>
-          </div>
-        </div>
-        <div className='d-flex justify-content-between pl-2 pr-2'>
-          <span className='d-block font-weight-light font-italic'>An item</span>
-          <div className='buttons-container'>
-            <a className='text-info' disabled>Edit</a>
-            <a className='text-danger pl-2' disabled>Delete</a>
-          </div>
-        </div>
-        <div className='d-flex justify-content-between pl-2 pr-2'>
-          <span className='d-block font-weight-light font-italic'>An item</span>
-          <div className='buttons-container'>
-            <a className='text-info' disabled>Edit</a>
-            <a className='text-danger pl-2' disabled>Delete</a>
-          </div>
-        </div>
-        <div className='d-flex justify-content-between pl-2 pr-2'>
-          <span className='d-block font-weight-light font-italic'>An item</span>
-          <div className='buttons-container'>
-            <a className='text-info' disabled>Edit</a>
-            <a className='text-danger pl-2' disabled>Delete</a>
-          </div>
-        </div>
-        <div className='d-flex justify-content-between pl-2 pr-2'>
-          <span className='d-block font-weight-light font-italic'>An item</span>
-          <div className='buttons-container'>
-            <a className='text-info' disabled>Edit</a>
-            <a className='text-danger pl-2' disabled>Delete</a>
-          </div>
-        </div>
-        <div className='d-flex justify-content-between pl-2 pr-2'>
-          <span className='d-block font-weight-light font-italic'>An item</span>
-          <div className='buttons-container'>
-            <a className='text-info' disabled>Edit</a>
-            <a className='text-danger pl-2' disabled>Delete</a>
-          </div>
-        </div>
+        )}
+        {remindersExist && currentDate.reminders.sort((a, b) => a.date - b.date).map((item, index) => {
+          const itemWithId = { ...item, id: currentDate.id }
+          return <ReminderListItem key={index} item={itemWithId} />
+        })}
       </div>
     </Card>
   )
 }
 
-export default RemindersList
+const mapStateToProps = (state) => {
+  return {
+    remindersObj: state.reminders
+  }
+}
+
+const mapDispatchToProps = {
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RemindersList)

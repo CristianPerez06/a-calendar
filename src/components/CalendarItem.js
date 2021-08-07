@@ -3,16 +3,9 @@ import { Card } from 'reactstrap'
 import { getDate, format } from 'date-fns'
 import CalendarItemModal from './CalendarItemModal'
 
-const MOCKED_DATA = [
-  { date: new Date(), text: 'a reminder', color: 'danger' },
-  { date: new Date(), text: 'other thing', color: 'success' },
-  { date: new Date(), text: 'something else', color: 'info' },
-  { date: new Date(), text: 'last one', color: 'warning' }
-]
-
 const CalendarItem = (props) => {
   // Props
-  const { item, isTitle = false } = props
+  const { item } = props
 
   // State
   const [modalIsOpen, setModalIsOpen] = useState(false)
@@ -22,45 +15,41 @@ const CalendarItem = (props) => {
     setModalIsOpen(true)
   }
 
-  const onCancelClicked = () => {
+  const onCloseClicked = () => {
     setModalIsOpen(false)
   }
 
   // Other
-  const value = isTitle
-    ? item
-    : item && getDate(item)
-
-  const isToday = value && !isTitle && (format(new Date(item), 'MM/dd/yyyy') === format(new Date(), 'MM/dd/yyyy'))
-
+  const value = item && getDate(item.date)
+  const reminders = item && item.reminders
+  const isToday = value && (format(new Date(item.date), 'MM/dd/yyyy') === format(new Date(), 'MM/dd/yyyy'))
   const customClass = value
-    ? 'calendar-item ' + (isTitle ? 'text-center ' : '') + (isToday ? 'border border-info' : '')
+    ? 'calendar-item ' + (isToday ? 'border border-info' : '')
     : 'empty-calendar-item text-center bg-light'
-
-  const itemIsClickable = (value && !isTitle)
-
-  const cursorProp = itemIsClickable ? 'pointer' : 'default'
+  const cursorProp = value ? 'pointer' : 'default'
   const calendarItemStyle = { cursor: cursorProp }
 
   return (
-    <div className='calendar-item' style={calendarItemStyle} onClick={itemIsClickable ? onItemClicked : undefined}>
+    <div className='calendar-item' style={calendarItemStyle} onClick={value ? onItemClicked : undefined}>
       <Card className={customClass} style={{ height: 100 + 'px' }}>
         {value || '-'}
-        {(value && !isTitle) && (
+        {value && reminders && (
           <>
-            {MOCKED_DATA.map((reminder, index) => {
-              return <div key={index} className={`bg-${reminder.color}`} style={{ fontSize: 10 + 'px', filter: 'grayscale(40%)', opacity: 0.5 }}>
-                {reminder.text}
-              </div>
+            {reminders.sort((a, b) => a.date - b.date).map((reminder, index) => {
+              return (
+                <div key={index} className={`border border-${reminder.color.value}`} style={{ fontSize: 10 + 'px', filter: 'grayscale(40%)', opacity: 0.5 }}>
+                  {reminder.text}
+                </div>
+              )
             })}
           </>
         )}
       </Card>
       {modalIsOpen && (
         <CalendarItemModal
-          selectedDate={item}
+          selectedDate={item.date}
           modalIsOpen={modalIsOpen}
-          onCloseClick={onCancelClicked}
+          onCloseClick={onCloseClicked}
         />
       )}
     </div>
