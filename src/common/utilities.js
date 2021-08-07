@@ -1,4 +1,4 @@
-import { startOfMonth, endOfMonth, getDay, eachDayOfInterval } from 'date-fns'
+import { startOfMonth, endOfMonth, getDay, eachDayOfInterval, getUnixTime } from 'date-fns'
 
 const TOTAL_CALENDAR_ITEMS = 42
 const DAYS_IN_A_WEEK = 7
@@ -35,7 +35,13 @@ export const getCalendarValues = (date) => {
   }
 
   // Month calendar items
-  const calendarItems = eachDayOfInterval({ start: firstDateOfMonth, end: lastDateOfMonth })
+  let calendarItems = eachDayOfInterval({ start: firstDateOfMonth, end: lastDateOfMonth })
+  calendarItems = calendarItems.map(item => {
+    return {
+      id: getUnixTime(item),
+      date: item
+    }
+  })
 
   const allCalendarItems = [
     ...firstCalendarItems,
@@ -52,4 +58,22 @@ export const getCalendarValues = (date) => {
   }
 
   return allCalendarItems
+}
+
+export const mapRemindersToCalendarItems = (calendarItems, remindersList) => {
+  const mappedReminders = calendarItems.map((calendarItem) => {
+    if (!calendarItem) {
+      return null
+    }
+
+    const remindersItem = remindersList.find(reminder => reminder.id === calendarItem.id)
+    const reminders = (remindersItem || {}).reminders || []
+
+    return {
+      ...calendarItem,
+      reminders: [...reminders]
+    }
+  })
+
+  return mappedReminders
 }
