@@ -76,28 +76,37 @@ const AddReminder = (props) => {
           onChange={onReminderTextChange}
         />
         <div className='clock-button-container d-flex justify-content-around mt-2'>
-          <TimePicker
-            onChange={onReminderTimeChange}
-            value={reminderTime}
-            disableClock
-            clearIcon={null}
-          />
-          <select
-            value={reminderColor.value}
-            onChange={onReminderColorChange}
-            className={`form-select text-${reminderColor.value}`}
-          >
-            {COLORS_LIST.map((option, index) => {
-              return (
-                <option key={index} className={`text-${option.value}`}>
-                  {option.label}
-                </option>
-              )
-            })}
-          </select>
-          <Button color='outline-secondary' disabled={!reminderText} onClick={onAddButtonClicked}>
-            Add
-          </Button>
+          <div className='row text-center'>
+            <div className='col-md-4 col-xs-6 mb-1'>
+              <TimePicker
+                onChange={onReminderTimeChange}
+                value={reminderTime}
+                disableClock
+                clearIcon={null}
+              />
+            </div>
+            <div className='col-md-4 col-xs-6 mb-1'>
+              <select
+                value={reminderColor.value}
+                onChange={onReminderColorChange}
+                className={`form-select text-${reminderColor.value}`}
+              >
+                {COLORS_LIST.map((option, index) => {
+                  return (
+                    <option key={index} className={`text-${option.value}`}>
+                      {option.label}
+                    </option>
+                  )
+                })}
+              </select>
+            </div>
+            <div className='col-md-4 col-xs-12 mb-1'>
+              <Button className='p-1' color='outline-secondary' disabled={!reminderText} onClick={onAddButtonClicked} style={{ fontSize: 13 + 'px' }}>
+                Add reminder
+              </Button>
+            </div>
+          </div>
+
         </div>
       </div>
     </Card>

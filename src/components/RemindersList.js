@@ -22,7 +22,7 @@ const RemindersList = (props) => {
             <span className='text-center'>No events</span>
           </div>
         )}
-        {remindersExist && currentDate.reminders.sort((a, b) => a.date - b.date).map((item, index) => {
+        {remindersExist && currentDate.reminders.sort((a, b) => a.reminderId - b.reminderId).map((item, index) => {
           const itemWithId = { ...item, id: currentDate.id }
           return <ReminderListItem key={index} item={itemWithId} />
         })}

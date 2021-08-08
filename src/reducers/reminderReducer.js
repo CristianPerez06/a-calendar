@@ -46,7 +46,7 @@ const updateList = (list, id, item) => {
   // Update list
   filteredList.push(itemInList)
 
-  return list
+  return filteredList
 }
 
 const removeFromList = (list, id, item) => {
@@ -67,7 +67,7 @@ const removeFromList = (list, id, item) => {
   // Update list
   filteredList.push(itemInList)
 
-  return list
+  return filteredList
 }
 
 export default function common (state = initialState, action) {
