@@ -6,7 +6,7 @@ const CalendarHeader = (props) => {
   const { item } = props
 
   return (
-    <div className='calendar-item text-center' style={{ cursor: 'default' }}>
+    <div className='calendar-header text-center' style={{ cursor: 'default' }}>
       <Card style={{ height: 50 + 'px' }}>
         {item}
       </Card>

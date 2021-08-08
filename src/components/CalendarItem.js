@@ -30,7 +30,7 @@ const CalendarItem = (props) => {
   const calendarItemStyle = { cursor: cursorProp }
 
   return (
-    <div className='calendar-item' style={calendarItemStyle} onClick={value ? onItemClicked : undefined}>
+    <div style={calendarItemStyle} onClick={value ? onItemClicked : undefined}>
       <Card className={customClass} style={{ height: 100 + 'px' }}>
         {value || '-'}
         {value && reminders && (
