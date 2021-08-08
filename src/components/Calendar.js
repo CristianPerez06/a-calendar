@@ -19,19 +19,19 @@ const Calendar = (props) => {
 
   return (
     <div className='calendar'>
-      <div className='calendar-header w-100 text-center pb-2 font-weight-bold'>
+      <div className='calendar-title w-100 text-center pb-2 font-weight-bold'>
         {`${selectedMonthName.toUpperCase()} - ${selectedYear}`}
       </div>
-      <div className='container-fluid'>
-        <div className='row'>
-          {DAY_NAMES.map((item, index) => <div className='col p-0' key={index}><CalendarHeader item={item} /></div>)}
+      <div className='calendar-items-container container-fluid'>
+        <div className='calendar-row row'>
+          {DAY_NAMES.map((item, index) => <div className='col p-0' key={index}><CalendarHeader className='calendar-header-spot' item={item} /></div>)}
         </div>
         {CALENDAR_INTERVALS.map((interval, intervalIndex) => {
           return (
-            <div className='row' key={intervalIndex}>
+            <div className='calendar-row row' key={intervalIndex}>
               {calendarItemsWithReminders.slice(interval.from, interval.to).map((calendarItem, calendarItemIndex) => {
                 return (
-                  <div className='col p-0' key={`${intervalIndex}-${calendarItemIndex}`}>
+                  <div className='calendar-spot col p-0' key={`${intervalIndex}-${calendarItemIndex}`}>
                     <CalendarItem item={calendarItem} />
                   </div>
                 )

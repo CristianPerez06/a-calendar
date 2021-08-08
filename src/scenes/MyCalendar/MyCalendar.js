@@ -20,18 +20,18 @@ const MyCalendar = (props) => {
   return (
     <div className='my-calendar-container h-100 w-100 d-flex justify-content-center align-items-center'>
       <Card className='my-calendar-container shadow' style={{ width: 850 + 'px' }}>
-        <Calendar selectedDate={selectedDate} />
+        <Calendar className='calendar' selectedDate={selectedDate} />
         <div className='pagination d-flex justify-content-between'>
           <Button
             color='secondary'
-            className='m-2 w-100'
+            className='previous-month-button m-2 w-100'
             onClick={onPrevMonthClicked}
           >
             {'<<<'}
           </Button>
           <Button
             color='secondary'
-            className='m-2 w-100'
+            className='next-month-button m-2 w-100'
             onClick={onNextMonthClicked}
           >
             {'>>>'}

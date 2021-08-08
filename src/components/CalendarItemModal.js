@@ -7,7 +7,6 @@ const CalendarItemModal = (props) => {
   const {
     selectedDate,
     modalIsOpen,
-    isBussy,
     onCloseClick
   } = props
 
@@ -17,14 +16,13 @@ const CalendarItemModal = (props) => {
         {format(new Date(selectedDate), 'EEEE, MMMM do, yyyy')}
       </ModalHeader>
       <ModalBody>
-        <RemindersList date={selectedDate} />
-        <AddReminder date={selectedDate} />
+        <RemindersList date={selectedDate} className='reminders-list' />
+        <AddReminder date={selectedDate} className='add-reminder' />
       </ModalBody>
       <ModalFooter>
         <Button
           color='secondary'
           onClick={onCloseClick}
-          disabled={isBussy}
         >
           Close
         </Button>
