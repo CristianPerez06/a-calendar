@@ -35,7 +35,7 @@ const CalendarItem = (props) => {
         {value || '-'}
         {value && reminders && (
           <>
-            {reminders.sort((a, b) => a.date - b.date).map((reminder, index) => {
+            {reminders.sort((a, b) => a.reminderId - b.reminderId).map((reminder, index) => {
               return (
                 <div key={index} className={`border border-${reminder.color.value}`} style={{ fontSize: 10 + 'px', filter: 'grayscale(40%)', opacity: 0.5 }}>
                   {reminder.text}

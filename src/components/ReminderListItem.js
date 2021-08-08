@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import { format } from 'date-fns'
 import { connect } from 'react-redux'
-import { updateReminderInList, removeReminderFromList } from '../actions/reminderActions'
+import { addReminderToList, updateReminderInList, removeReminderFromList } from '../actions/reminderActions'
 import EditReminder from './EditReminder'
 
 const buttonAsLinkStyles = { borderStyle: 'none', background: 'none', textDecoration: 'underline' }
 
 const ReminderListItem = (props) => {
   // Props
-  const { item, updateReminderInList, removeReminderFromList } = props
+  const { item, addReminderToList, updateReminderInList, removeReminderFromList } = props
 
   // State
   const [editMode, setEditMode] = useState(false)
@@ -18,12 +18,21 @@ const ReminderListItem = (props) => {
     setEditMode(true)
   }
 
-  const onSaveEditClicked = (updatedItem) => {
-    const formattedItem = {
-      id: item.id,
-      reminder: updatedItem
+  const onSaveEditClicked = (modifiedItem) => {
+    const { updatedReminder, id } = modifiedItem
+    if (id !== item.id) {
+      // Remove reminder (has new date)
+      const formattedItemToRemove = { id: item.id, reminder: { reminderId: item.reminderId } }
+      removeReminderFromList(formattedItemToRemove)
+
+      // Add reminder (has new date)
+      const formattedItemToAdd = { id: id, reminder: updatedReminder }
+      addReminderToList(formattedItemToAdd)
+    } else {
+      // Update reminder (has same date)
+      const formattedItem = { id: item.id, reminder: updatedReminder }
+      updateReminderInList(formattedItem)
     }
-    updateReminderInList(formattedItem)
     setEditMode(false)
   }
 
@@ -32,16 +41,11 @@ const ReminderListItem = (props) => {
   }
 
   const onDeleteClicked = () => {
-    const formattedItem = {
+    const formattedItemToRemove = {
       id: item.id,
-      reminder: {
-        reminderId: item.reminderId,
-        color: item.color,
-        text: item.text,
-        date: item.date
-      }
+      reminder: { reminderId: item.reminderId }
     }
-    removeReminderFromList(formattedItem)
+    removeReminderFromList(formattedItemToRemove)
   }
 
   return (
@@ -68,6 +72,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
+  addReminderToList,
   updateReminderInList,
   removeReminderFromList
 }
