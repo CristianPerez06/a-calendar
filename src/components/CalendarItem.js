@@ -31,7 +31,7 @@ const CalendarItem = (props) => {
 
   return (
     <div style={calendarItemStyle} onClick={value ? onItemClicked : undefined}>
-      <Card className={customClass} style={{ height: 100 + 'px' }}>
+      <Card className={customClass} style={{ height: 75 + 'px' }}>
         {value || '-'}
         {value && reminders && (
           <>
