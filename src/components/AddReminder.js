@@ -87,7 +87,7 @@ const AddReminder = (props) => {
             </div>
             <div className='col-md-4 col-xs-6 mb-1'>
               <select
-                value={reminderColor.value}
+                value={reminderColor.label}
                 onChange={onReminderColorChange}
                 className={`form-select text-${reminderColor.value}`}
               >
