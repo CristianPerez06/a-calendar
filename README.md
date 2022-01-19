@@ -1,4 +1,4 @@
-# react-redux-calendar
+# a-react-redux-calendar
 
 ## Features included:
   - Included Redux as the state management library
