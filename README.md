@@ -16,9 +16,6 @@
   - Methods used to calculate the Calendar "skeleton" should be optimized.
   - Some more tests should be added to have good coverage.
 
- ## Demo
- https://a-react-calendar.herokuapp.com/
-
 
 
 
