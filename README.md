@@ -1,6 +1,8 @@
 # a-calendar
 
-A calendar built from scratch.
+A ReactJS calendar built from scratch.
+
+**_This application was developed as part of a code challenge with a specific timeline, which means there are areas that can be further enhanced and improved._**
 
 ## Tech stack
 

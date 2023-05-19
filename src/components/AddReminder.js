@@ -75,9 +75,9 @@ const AddReminder = (props) => {
           maxLength='30'
           onChange={onReminderTextChange}
         />
-        <div className='clock-button-container d-flex justify-content-around mt-2'>
+        <div className='clock-button-container d-flex flex-column justify-content-center align-items-center mt-2 mt-2'>
           <div className='row text-center'>
-            <div className='col-md-4 col-xs-6 mb-1'>
+            <div className='col-6 mb-1'>
               <TimePicker
                 onChange={onReminderTimeChange}
                 value={reminderTime}
@@ -85,11 +85,12 @@ const AddReminder = (props) => {
                 clearIcon={null}
               />
             </div>
-            <div className='col-md-4 col-xs-6 mb-1'>
+            <div className='col-6 mb-1'>
               <select
                 value={reminderColor.label}
                 onChange={onReminderColorChange}
                 className={`form-select text-${reminderColor.value}`}
+                style={{ padding: 1 + 'px' }}
               >
                 {COLORS_LIST.map((option, index) => {
                   return (
@@ -100,13 +101,20 @@ const AddReminder = (props) => {
                 })}
               </select>
             </div>
-            <div className='col-md-4 col-xs-12 mb-1'>
-              <Button className='p-1' color='outline-secondary' disabled={!reminderText} onClick={onAddButtonClicked} style={{ fontSize: 13 + 'px' }}>
+          </div>
+          <div className='row text-center'>
+            <div className="col-12 mt-2">
+              <Button
+                className='p-1'
+                color='outline-secondary'
+                disabled={!reminderText}
+                onClick={onAddButtonClicked}
+                style={{ fontSize: 13 + 'px' }}
+              >
                 Add reminder
               </Button>
             </div>
           </div>
-
         </div>
       </div>
     </Card>
