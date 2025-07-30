@@ -1,12 +1,8 @@
 # a-calendar
 
-A ReactJS calendar built from scratch.
-
-**_This application was developed as part of a code challenge with a specific timeline, which means there are areas that can be further enhanced and improved._**
+A React-based calendar application with reminder functionality. Features include monthly calendar navigation, adding/editing reminders with custom times and colors, and a clean Bootstrap UI. Built with Redux for state management and includes comprehensive test coverage.
 
 ## Tech stack
-
-### Frontend
 
 - Javascript
 - ReactJS
@@ -18,16 +14,24 @@ A ReactJS calendar built from scratch.
 - react-time-picker
 - reactstrap
 
-## How to execute the app
+## Getting Started
 
-1. `npm install`
-2. `npm start`
+### Development Server
 
-## Live example
+Next step is to install dependencies and run the development server:
 
-This example is deployed on [Render](https://render.com/) using a free account. Taking this into account there are a couple of things to keep in mind before using the app:
+```bash
+To run the application locally:
 
-- On first use, the App will have to boot, which could take several seconds.
-- Extensive use may affect performance.
+1. Install dependencies: `npm install`
+2. Start the development server: `npm start`
+```
 
-Go to [live example](https://a-calendar.onrender.com)
+## Live Demo
+
+A live version of this app is hosted on [Render](https://render.com/) (free tier). Please note:
+
+- The app may take several seconds to start on first use, as the server may be sleeping.
+- Performance may be limited during periods of high usage.
+
+[View the live demo here](https://a-calendar.onrender.com)
